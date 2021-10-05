@@ -21,7 +21,7 @@ const bugSize = 18
 
 // MinSize calculates the minimum size of a bug button. A fixed amount.
 func (b *bugRenderer) MinSize() fyne.Size {
-	return fyne.NewSize(bugSize+theme.Padding()*2, bugSize+theme.Padding()*2)
+	return fyne.NewSize(bugSize+theme.Padding()*4, bugSize+theme.Padding()*2)
 }
 
 // Layout the components of the widget
@@ -30,7 +30,7 @@ func (b *bugRenderer) Layout(size fyne.Size) {
 	b.icon.Resize(inner)
 	b.icon.Move(fyne.NewPos(theme.Padding(), theme.Padding()))
 
-	textSize := size.Height * .67
+	textSize := size.Height * .3
 	textMin := fyne.MeasureText(b.label.Text, textSize, fyne.TextStyle{Bold: true})
 
 	b.label.TextSize = textSize
@@ -53,7 +53,7 @@ func (b *bugRenderer) Refresh() {
 	b.label.Text = b.button.text
 
 	b.icon.Hidden = b.button.icon == nil
-	if b.button.icon != nil {
+	if b.button.icon == nil {
 		b.icon.Resource = b.button.icon
 	}
 
